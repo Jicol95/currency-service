@@ -1,16 +1,69 @@
 syntax = "proto3";
 
-option go_package = "./pkg/api/v1";
+option go_package = "../currency";
 
 service Currency {
+    // GetRate returns the exchange rate for the two provided currency codes
     rpc GetRate(RateRequest) returns (RateResponse);
 }
 
+
+// RateRequest defines the request for the GetRate call
 message RateRequest {
-    string Base = 1;
-    string Destination = 2;
+    // Base is the base currency code for the rate
+    Currencies Base = 1;
+    // Destination is the desination currency code for the rate
+    Currencies Destination = 2;
 }
 
+
+// RateResponse is the response from a GetRate call, it contains
+// rate which is a floating point number and can be used to convert between the
+// two currencies specified in the request
 message RateResponse {
     float Rate = 1;
+}
+
+// Currencies is an enum which represents the allowed currencies for the API
+enum Currencies {
+    AUD=0;
+    BGN=1;
+    BRL=2;
+    CAD=3;
+    CHF=4;
+    CNY=5;
+    CYP=6;
+    CZK=7;
+    DKK=8;
+    EEK=9;
+    GBP=10;
+    HKD=11;
+    HRK=12;
+    HUF=13;
+    IDR=14;
+    ILS=15;
+    INR=16;
+    ISK=17;
+    JPY=18;
+    KRW=19;
+    LTL=20;
+    LVL=21;
+    MTL=22;
+    MXN=23;
+    MYR=24;
+    NOK=25;
+    NZD=26;
+    PHP=27;
+    PLN=28;
+    RON=29;
+    RUB=30;
+    SEK=31;
+    SGD=32;
+    SIT=33;
+    SKK=34;
+    THB=35;
+    TRL=36;
+    TRY=37;
+    USD=38;
+    ZAR=39;
 }
